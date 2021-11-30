@@ -124,7 +124,9 @@ wget https://zenodo.org/record/4587955/files/silva_nr99_v138.1_train_set.fa.gz
 ```
 
 ```{r}
-
+fastaRef <- "/home/rstudio/silva_nr99_v138.1_train_set.fa.gz"
+taxTab <- assignTaxonomy(seqtabNoC, refFasta = fastaRef, multithread=TRUE)
+unname(head(taxTab))
 ```
 
 
