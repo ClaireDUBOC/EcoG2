@@ -90,6 +90,7 @@ head(out)
 ```
 
 ```{r}
+#on ne garde qu'une seule fois les séquences identiques 
 derepFs <- derepFastq(filtFs, verbose=TRUE)
 derepRs <- derepFastq(filtRs, verbose=TRUE)
 names(derepFs) <- sampleNames
@@ -145,6 +146,12 @@ fitGTR <- optim.pml(fitGTR, model="GTR", optInv=TRUE, optGamma=TRUE,
         rearrangement = "stochastic", control = pml.control(trace = 0))
 detach("package:phangorn", unload=TRUE)
 ```
+
+
+
+
+
+
 
 
 
