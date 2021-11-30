@@ -1,6 +1,6 @@
 ---
 title: "R Notebook"
-output: html_notebook
+output: github_document 
 ---
 
 ```{bash}
@@ -107,6 +107,6 @@ plotErrors(errR)
 dadaFs <- dada(derepFs, err=errF, multithread=TRUE)
 ```
 ```{r}
-
+dadaRs <- dada(derepRs, err=errR, multithread=TRUE)
 ```
 
