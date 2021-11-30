@@ -105,11 +105,16 @@ plotErrors(errR)
 ```
 
 ```{r}
+#corrige les erreurs ds les reads eux-mêmes 
 dadaFs <- dada(derepFs, err=errF, multithread=TRUE)
 ```
 
 ```{r}
 dadaRs <- dada(derepRs, err=errR, multithread=TRUE)
+```
+
+```{r}
+dadaFs[[1]]
 ```
 
 ```{r}
