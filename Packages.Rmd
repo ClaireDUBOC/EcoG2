@@ -106,4 +106,7 @@ plotErrors(errR)
 ```{r}
 dadaFs <- dada(derepFs, err=errF, multithread=TRUE)
 ```
+```{r}
+
+```
 
