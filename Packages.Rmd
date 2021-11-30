@@ -106,7 +106,25 @@ plotErrors(errR)
 ```{r}
 dadaFs <- dada(derepFs, err=errF, multithread=TRUE)
 ```
+
 ```{r}
 dadaRs <- dada(derepRs, err=errR, multithread=TRUE)
 ```
+
+```{r}
+mergers <- mergePairs(dadaFs, derepFs, dadaRs, derepRs)
+seqtabAll <- makeSequenceTable(mergers[!grepl("Mock", names(mergers))])
+table(nchar(getSequences(seqtabAll)))
+seqtabNoC <- removeBimeraDenovo(seqtabAll)
+```
+
+```{bash}
+cd ~
+wget https://zenodo.org/record/4587955/files/silva_nr99_v138.1_train_set.fa.gz 
+```
+
+```{r}
+
+```
+
 
