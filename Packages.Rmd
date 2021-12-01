@@ -135,6 +135,9 @@ wget https://zenodo.org/record/4587955/files/silva_nr99_v138.1_train_set.fa.gz
 ```
 
 #assignement taxonomique 
+#besoin d'un ju de données pr apprendre, un peu comme un machine learning (lignes de code précédentes). 
+#assignement d'une taxonomie à chacune des séquences. 
+
 ```{r}
 fastaRef <- "/home/rstudio/silva_nr99_v138.1_train_set.fa.gz"
 taxTab <- assignTaxonomy(seqtabNoC, refFasta = fastaRef, multithread=TRUE)
@@ -146,6 +149,8 @@ seqs <- getSequences(seqtabNoC)
 names(seqs) <- seqs
 alignment <- AlignSeqs(DNAStringSet(seqs), anchor=NA,verbose=FALSE)
 ```
+#donne une table d'observation avec la séquence et le nombre d'occurence ds les différents échantillons. 
+
 
 ```{r} 
 phangAlign <- phyDat(as(alignment, "matrix"), type="DNA")
