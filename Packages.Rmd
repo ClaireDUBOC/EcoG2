@@ -163,6 +163,16 @@ fitGTR <- optim.pml(fitGTR, model="GTR", optInv=TRUE, optGamma=TRUE,
 detach("package:phangorn", unload=TRUE)
 ```
 
+#combiner dans un phyloseq
+```{r}
+samdf <- read.csv("https://raw.githubusercontent.com/spholmes/F1000_workflow/master/data/MIMARKS_Data_combined.csv",header=TRUE)
+samdf$SampleID <- paste0(gsub("00", "", samdf$host_subject_id), "D", samdf$age-21)
+samdf <- samdf[!duplicated(samdf$SampleID),] 
+rownames(seqtabAll) <- gsub("124", "125", rownames(seqtabAll)) 
+all(rownames(seqtabAll) %in% samdf$SampleID)
+```
+#contient la table d'obersevation, de taxonomie, de métadonnées + arbres se nécessaire 
+
 
 
 
