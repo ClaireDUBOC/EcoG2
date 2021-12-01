@@ -123,6 +123,11 @@ seqtabAll <- makeSequenceTable(mergers[!grepl("Mock", names(mergers))])
 table(nchar(getSequences(seqtabAll)))
 seqtabNoC <- removeBimeraDenovo(seqtabAll)
 ```
+#table de séquences => cb de fois ont été observées chacune des ASV ds chaque échantillon. 
+#les échantillons qui contiennent le mot Mock sont exclus (Mock = communauté artificielle qu'on met ds l'échantillon pr vérifier si le traitement bioinfo à bien été fait, comme une témoin. On doit pourvoir retrouver cette communauté après le séquençage et la bioinfo). 
+#la colonne au milieu avec la plus gde abondance donne la longueur moyenne du bout d'ADN séquencé, donc environ 253 pb. 
+#présence de chimères, avec des bouts qui viennent de plrs individus de l'échantillon. Il faut s'en débarrasser, avec fonction removeBimeraDenovo.
+
 
 ```{bash}
 cd ~
@@ -151,8 +156,6 @@ fitGTR <- optim.pml(fitGTR, model="GTR", optInv=TRUE, optGamma=TRUE,
         rearrangement = "stochastic", control = pml.control(trace = 0))
 detach("package:phangorn", unload=TRUE)
 ```
-
-
 
 
 
