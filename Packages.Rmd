@@ -170,10 +170,24 @@ samdf$SampleID <- paste0(gsub("00", "", samdf$host_subject_id), "D", samdf$age-2
 samdf <- samdf[!duplicated(samdf$SampleID),] 
 rownames(seqtabAll) <- gsub("124", "125", rownames(seqtabAll)) 
 all(rownames(seqtabAll) %in% samdf$SampleID)
+rownames(samdf) <- samdf$SampleID
+keep.cols <- c("collection_date", "biome", "target_gene", "target_subfragment",
+"host_common_name", "host_subject_id", "age", "sex", "body_product", "tot_mass",
+"diet", "family_relationship", "genotype", "SampleID") 
+samdf <- samdf[rownames(seqtabAll), keep.cols]
 ```
 #contient la table d'obersevation, de taxonomie, de métadonnées + arbres se nécessaire 
+#la première ligne va permttre de charger toutes les données métag associées aux échantillons. 
+#corrige les erreurs ds la table. 
+#va chercher dans le ss objet ce qui lui faut. 
 
-
+```{r}
+ps <- phyloseq(otu_table(seqtabNoC, taxa_are_rows=FALSE), 
+               sample_data(samdf), 
+               tax_table(taxTab),phy_tree(fitGTR$tree))
+ps <- prune_samples(sample_names(ps) != "Mock", ps) # Remove mock sample
+ps
+```
 
 
 
