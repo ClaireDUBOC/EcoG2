@@ -190,5 +190,21 @@ ps
 ```
 
 
+#analyse avec phyloseq 
+
+```{r}
+rank_names(ps)
+table(tax_table(ps)[, "Phylum"], exclude = NULL)
+ps <- subset_taxa(ps, !is.na(Phylum) & !Phylum %in% c("", "uncharacterized"))
+ps
+prevdf = apply(X = otu_table(ps),
+               MARGIN = ifelse(taxa_are_rows(ps), yes = 1, no = 2),
+               FUN = function(x){sum(x > 0)})
+prevdf = data.frame(Prevalence = prevdf,
+                    TotalAbundance = taxa_sums(ps),
+                    tax_table(ps))
+```
+
+
 
 
