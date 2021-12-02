@@ -122,13 +122,21 @@ keep.cols <- c("collection_date", "biome", "target_gene", "target_subfragment",
 samdf <- samdf[rownames(seqtabAll), keep.cols]
 ```
 
-```{r}
+
 ps <- phyloseq(otu_table(seqtabNoC, taxa_are_rows=FALSE), 
                sample_data(samdf), 
                tax_table(taxTab),phy_tree(fitGTR$tree))
 ps <- prune_samples(sample_names(ps) != "Mock", ps) # Remove mock sample
 ps
+
+
+
+```{r}
+ps_connect <-url("https://raw.githubusercontent.com/spholmes/F1000_workflow/master/data/ps.rds")
+ps = readRDS(ps_connect)
+ps
 ```
+
 
 ```{r}
 rank_names(ps)
