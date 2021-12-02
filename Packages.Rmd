@@ -291,7 +291,6 @@ if(any(!.inst)){BiocManager::install(.bioc_packages[!.inst])
 
 ```{r}
 qplot(sample_data(ps)$age, geom = "histogram",binwidth=20) + xlab("age")
-
 ``` 
 
 ```{r}
