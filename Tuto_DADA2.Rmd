@@ -11,16 +11,6 @@ library("BiocStyle")
 sapply(c(.cran_packages, .bioc_packages), require, character.only = TRUE)
 ```
 
-```{bash}
-cd ~
-wget https://mothur.s3.us-east-2.amazonaws.com/wiki/miseqsopdata.zip
-unzip miseqsopdata.zip
-```
-
-```{bash}
-cd /home/rstudio
-unzip miseqsopdata.zip
-```
 
 ````{r}
 set.seed(100)
@@ -94,11 +84,6 @@ mergers <- mergePairs(dadaFs, derepFs, dadaRs, derepRs)
 seqtabAll <- makeSequenceTable(mergers[!grepl("Mock", names(mergers))])
 table(nchar(getSequences(seqtabAll)))
 seqtabNoC <- removeBimeraDenovo(seqtabAll)
-```
-
-```{bash}
-cd ~
-wget https://zenodo.org/record/4587955/files/silva_nr99_v138.1_train_set.fa.gz 
 ```
 
 ```{r}
@@ -294,5 +279,26 @@ abund_ranks <- t(apply(abund, 1, rank))
 abund_ranks <- abund_ranks - 329
 abund_ranks[abund_ranks < 1] <- 1
 ```
+
+```{r}
+library(dplyr)
+library(reshape2)
+abund_df <- melt(abund, value.name = "abund") %>%
+  left_join(melt(abund_ranks, value.name = "rank"))
+colnames(abund_df) <- c("sample", "seq", "abund", "rank")
+
+abund_df <- melt(abund, value.name = "abund") %>%
+  left_join(melt(abund_ranks, value.name = "rank"))
+colnames(abund_df) <- c("sample", "seq", "abund", "rank")
+
+sample_ix <- sample(1:nrow(abund_df), 8)
+ggplot(abund_df %>%
+         filter(sample %in% abund_df$sample[sample_ix])) +
+  geom_point(aes(x = abund, y = rank, col = sample),
+             position = position_jitter(width = 0.2), size = 1.5) +
+  labs(x = "Abundance", y = "Thresholded rank") +
+  scale_color_brewer(palette = "Set2")
+```
+
 
 
