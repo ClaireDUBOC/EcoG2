@@ -3,6 +3,9 @@ title: "R Notebook"
 output: github_document
 ---
 
+# Traitement de données avec DADA2 
+
+
 ```{r}
 library("knitr")
 library("BiocStyle")
@@ -12,17 +15,16 @@ sapply(c(.cran_packages, .bioc_packages), require, character.only = TRUE)
 ```
 
 
-````{r}
+```{r}
 set.seed(100)
 miseq_path <- "/home/rstudio/MiSeq_SOP"
 list.files(miseq_path)
-````
+```
 
 ```{r}
 fnFs <- sort(list.files(miseq_path, pattern="_R1_001.fastq"))
 fnRs <- sort(list.files(miseq_path, pattern="_R2_001.fastq"))
 sampleNames <- sapply(strsplit(fnFs, "_"), `[`, 1)
-#permet de remplacer un terme dans la liste => prend le premier terme avant le _ enlève ce qu'il y a après 
 fnFs <- file.path(miseq_path, fnFs)
 fnRs <- file.path(miseq_path, fnRs)
 ```
@@ -242,9 +244,9 @@ qplot(rel_abund[, 12], geom = "histogram",binwidth=0.05) +
 ```
 
 ```{r}
-outliers <- c("F5D165", "F6D165", "M3D175", "M4D175", "M5D175", "M6D175")
-ps <- prune_samples(!(sample_names(ps) %in% outliers), ps)
-which(!rowSums(otu_table(ps)) > 1000)
+rel_abund <- t(apply(otu_table(ps), 1, function(x) x / sum(x)))
+qplot(rel_abund[, 12], geom = "histogram",binwidth=0.05) +
+  xlab("Relative abundance")
 ```
 
 ```{r}
@@ -375,7 +377,4 @@ ggplot() +
   coord_fixed(sqrt(ps_ccpna$CCA$eig[2] / ps_ccpna$CCA$eig[1])*0.45   ) +
   theme(panel.border = element_rect(color = "#787878", fill = alpha("white", 0)))
 ```
-
-
-
 
