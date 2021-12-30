@@ -15,12 +15,18 @@ sapply(c(.cran_packages, .bioc_packages), require, character.only = TRUE)
 
 Commande pour avoir mes données, comme miseq_path 
 
-```{r}
-
-
+```{bash}
+#cd /home/rstudio/
+#wget http://mespages.univ-brest.fr/~maignien/drop/doi_10.5061_dryad.7h44j0zqt__v7.tar.gz
+#tar -xvf doi_10.5061_dryad.7h44j0zqt__v7.tar.gz
+#unzip Carrier_etal_Dryad1.zip -d data
 ```
 
-
+```{r}
+set.seed(100)
+miseq_path <- "/home/rstudio/doi_10.5061_dryad.7h44j0zqt__v7/data/Carrier_etal_Dryad" 
+list.files(miseq_path)
+```
 Ne pas oublier de changer le nom des variables, notamment miseq_path 
 
 ```{r}
