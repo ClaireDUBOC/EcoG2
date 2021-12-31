@@ -27,7 +27,7 @@ set.seed(100)
 miseq_path <- "/home/rstudio/doi_10.5061_dryad.7h44j0zqt__v7/data/Carrier_etal_Dryad" 
 list.files(miseq_path)
 ```
-Ne pas oublier de changer le nom des variables, notamment miseq_path 
+
 
 ```{r}
 fnFs <- sort(list.files(miseq_path, pattern="_R1_001.fastq"))
