@@ -13,7 +13,6 @@ library("BiocStyle")
 sapply(c(.cran_packages, .bioc_packages), require, character.only = TRUE)
 ```
 
-Commande pour avoir mes données, comme miseq_path 
 
 ```{bash}
 #cd /home/rstudio/
@@ -67,6 +66,7 @@ derepRs <- derepFastq(filtRs, verbose=TRUE)
 names(derepFs) <- sampleNames
 names(derepRs) <- sampleNames
 ```
+
 
 ```{r}
 errF <- learnErrors(filtFs, multithread=TRUE)
